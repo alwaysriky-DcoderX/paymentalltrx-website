@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILL STORE - ALL TRX ADMIN</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        :root {
+            --blue-primary: #3b82f6;
+            --purple-primary: #8b5cf6;
+            --dark-primary: #1e293b;
+            --gradient: linear-gradient(135deg, var(--blue-primary), var(--purple-primary));
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: var(--gradient);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png') no-repeat;
+            background-position: 90% 20%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section {
+            background-color: rgba(30, 41, 59, 0.85);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--purple-primary);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            padding-bottom: 0.3rem;
+            border-bottom: 3px solid var(--purple-primary);
+        }
+        
+        .format-box {
+            background-color: rgba(30, 41, 59, 0.7);
+            border: 2px solid var(--blue-primary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .format-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            opacity: 0.2;
+        }
+        
+        .highlight {
+            color: var(--purple-primary);
+            font-weight: 600;
+        }
+        
+        .note {
+            color: #f59e0b;
+            font-style: italic;
+            display: block;
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: rgba(30, 41, 59, 0.7);
+        }
+        
+        .price-table th, .price-table td {
+            border: 2px solid var(--blue-primary);
+            padding: 0.8rem;
+            text-align: center;
+        }
+        
+        .price-table th {
+            background-color: rgba(59, 130, 246, 0.3);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        
+        .payment-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .payment-card {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-top: 5px solid var(--purple-primary);
+            transition: all 0.3s ease;
+            max-width: 350px;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .payment-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .qris-code {
+            max-width: 100%;
+            border-radius: 12px;
+            border: 3px solid var(--purple-primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .qris-code:hover {
+            transform: scale(1.03);
+        }
+        
+        .wa-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            font-size: 1.1rem;
+        }
+        
+        .wa-button:hover {
+            background: linear-gradient(135deg, #128C7E, #25D366);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .wa-button::before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url('https://img.icons8.com/color/48/000000/whatsapp--v1.png') no-repeat;
+            background-size: contain;
+            margin-right: 10px;
+        }
+        
+        .arrow-up {
+            display: block;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            color: var(--purple-primary);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.9);
+            margin-top: 3rem;
+            border-top: 3px solid var(--purple-primary);
+        }
+        
+        .footer p {
+            margin: 0.5rem 0;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .container {
+                margin: 1.5rem auto;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .payment-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .payment-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="logo">MILL STORE</h1>
+        <p class="tagline">ALL Trx mill - Jual Beli Akun Aman dan Terpercaya hanya di bang mill</p>
+    </div>
+    
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">ALL TRX</h2>
+            <div class="format-box">
+              
+        <div class="section">
+            <h2 class="section-title">LIST ALL TRX ADMIN</h2>
+            <h3 style="color: var(--purple-primary); font-size: 1.3rem;">*_ADMIN MILL STORE_*</h3>
+            
+            <table class="price-table">
+                <tr>
+                    <th>ALL TRX</th>
+                    <th>HARGA</th>
+                </tr>
+                <tr>
+                    <td>Panel unli</td>
+                    <td>5k</td>
+                </tr>
+                <tr>
+                    <td>JASTEB</td>
+                    <td>Harga tanya mill</td>
+                </tr>
+                <tr>
+                    <td>APK ANAK JB</td>
+                    <td>6k</td>
+                </tr>
+                <tr>
+                    <td>PT JASTEB</td>
+                    <td>10k</td>
+                </tr>
+                <tr>
+                    <td>QRIS NO KTP</td>
+                    <td>5K</td>
+                </tr>
+                </tr>
+                    <td>Stok ff</td>
+                    <td>Tergantu akun</td>
+                </tr>
+                </tr>
+                    <td>JUAL AKUN</td>
+                    <td>Langsung ke mill</td>
+                </tr>
+                </tr>
+                     <td>Unchek</td>
+                    <td>tanya mill</td>
+                 </tr>
+                </tr>
+                     <td>Murlog</td>
+                    <td>10k</td>
+                </tr>
+                </tr>
+                     <td>Apk save kontak</td>
+                    <td>2k</td>
+                </tr>
+                </tr>
+                     <td>Logo</td>
+                    <td>1k</td>
+                </tr>
+                </tr>
+                     <td>Murid push kontak anti kenon</td>
+                    <td>5k</td>
+                </tr>
+                </tr></tr>
+                    <td>AL JEBOL FB</td>
+                    <td>8k</td>
+                </tr>
+            </table>
+            
+            <p class="note">NOTE: KALO BELI JANGAN PHP PAYMENT MINTA ADMIN,INSYAALLAH ORANG YANG MEMBELI GAK NIPU ADALAH PENGHUNI SURGA</p>
+        </div>
